@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎭 Whack-A-Fool — April Fools Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --bg:#12071f;
+  --bg2:#1e0d35;
+  --bg3:#2a1245;
+  --gold:#fbbf24;
+  --orange:#f97316;
+  --red:#ef4444;
+  --green:#22c55e;
+  --pink:#ec4899;
+  --purple:#7c3aed;
+  --blue:#60a5fa;
+}
+
+body{
+  background:var(--bg);
+  min-height:100dvh;
+  font-family:'Nunito',sans-serif;
+  color:#fff;
+  overflow:hidden;
+  position:relative;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+
+/* ─── STAR BG ─── */
+#starBg{
+  position:fixed;inset:0;pointer-events:none;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(236,72,153,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(96,165,250,0.08) 0%, transparent 50%);
+}
+.star{
+  position:absolute;border-radius:50%;
+  background:rgba(255,255,255,0.8);
+  animation:twinkle ease-in-out infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:.15;transform:scale(.8);}
+  50%{opacity:1;transform:scale(1.3);}
+}
+
+/* ─── SCREENS ─── */
+.screen{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:20px;
+  transition:opacity .25s,transform .25s;
+}
+.screen.hidden{opacity:0;pointer-events:none;transform:scale(.97);}
+
+/* ─── MENU ─── */
+#menu .jester-icon{
+  font-size:clamp(64px,12vw,100px);
+  display:block;text-align:center;
+  animation:jesterBounce .9s ease-in-out infinite alternate;
+  filter:drop-shadow(0 0 20px rgba(251,191,36,.5));
+}
+@keyframes jesterBounce{
+  0%{transform:scale(1) rotate(-6deg);}
+  100%{transform:scale(1.08) rotate(6deg);}
+}
+#menu .logo{
+  font-family:'Boogaloo',cursive;
+  font-size:clamp(44px,10vw,90px);
+  background:linear-gradient(135deg,#fbbf24 0%,#f97316 45%,#ec4899 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-align:center;line-height:1;margin:10px 0 6px;
+  filter:drop-shadow(0 0 40px rgba(251,191,36,.3));
+}
+#menu .tagline{
+  font-size:clamp(11px,2.5vw,15px);
+  color:rgba(255,255,255,.45);
+  letter-spacing:4px;text-transform:uppercase;
+  margin-bottom:36px;text-align:center;
+}
+#menu .username-pill{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(251,191,36,.3);
+  border-radius:9999px;
+  padding:6px 18px;
+  font-size:15px;
+  color:#fbbf24;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  transition:all .2s;
+}
+#menu .username-pill:hover{background:rgba(251,191,36,.15);}
+
+/* ─── BUTTONS ─── */
+.btn{
+  display:block;width:260px;padding:14px 28px;
+  margin:8px auto;border:none;border-radius:50px;
+  font-family:'Boogaloo',cursive;font-size:22px;
+  cursor:pointer;transition:transform .12s,box-shadow .12s;
+  position:relative;overflow:hidden;
+}
+.btn::after{
+  content:'';position:absolute;inset:0;
+  background:rgba(255,255,255,.1);opacity:0;transition:opacity .12s;
+}
+.btn:hover::after{opacity:1;}
+.btn:active{transform:scale(.96)!important;}
+
+.btn-play{
+  background:linear-gradient(135deg,#fbbf24,#f97316);
+  color:#12071f;font-size:26px;
+  box-shadow:0 4px 24px rgba(251,191,36,.35);
+}
+.btn-play:hover{transform:scale(1.04);box-shadow:0 6px 32px rgba(251,191,36,.55);}
+
+.btn-ghost{
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.18);
+}
+.btn-ghost:hover{background:rgba(255,255,255,.14);}
+
+.btn-danger{
+  background:linear-gradient(135deg,#ef4444,#b91c1c);
+  color:#fff;font-size:24px;
+  box-shadow:0 4px 20px rgba(239,68,68,.35);
+}
+.btn-danger:hover{transform:scale(1.03);box-shadow:0 6px 28px rgba(239,68,68,.5);}
+
+/* ─── WARNING BOX ─── */
+.warn-box{
+  background:rgba(251,191,36,.1);
+  border:1px solid rgba(251,191,36,.3);
+  border-radius:14px;padding:12px 20px;
+  max-width:300px;text-align:center;
+  font-size:13px;color:rgba(251,191,36,.85);
+  margin:10px 0;line-height:1.5;
+}
+
+/* ─── HOW TO PLAY ─── */
+#howto h2{
+  font-family:'Boogaloo',cursive;font-size:40px;
+  margin-bottom:6px;text-align:center;
+}
+.legend{
+  display:flex;gap:14px;justify-content:center;
+  flex-wrap:wrap;margin:20px 0;
+}
+.legend-card{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;padding:14px 12px;
+  text-align:center;min-width:88px;
+  transition:transform .15s;
+}
+.legend-card:hover{transform:translateY(-3px);}
+.legend-card .em{font-size:36px;display:block;margin-bottom:4px;}
+.legend-pts{font-family:'Boogaloo',cursive;font-size:22px;color:#fbbf24;}
+.legend-name{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px;}
+
+/* ─── HIGH SCORES ─── */
+#scores h2{
+  font-family:'Boogaloo',cursive;font-size:38px;
+  margin-bottom:4px;text-align:center;
+}
+.scores-table{
+  list-style:none;width:100%;max-width:300px;
+  margin:16px auto;
+}
+.score-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;margin-bottom:8px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+}
+.score-rank{
+  font-family:'Boogaloo',cursive;font-size:22px;
+  color:rgba(255,255,255,.35);width:36px;
+}
+.score-rank.g1{color:#ffd700;}
+.score-rank.g2{color:#c0c0c0;}
+.score-rank.g3{color:#cd7f32;}
+.score-pts{
+  font-family:'Boogaloo',cursive;font-size:22px;color:var(--gold);
+}
+.score-name{
+  font-size:15px;color:rgba(255,255,255,.85);font-weight:600;
+}
+
+/* ─── HUD ─── */
+#hud{
+  position:fixed;top:0;left:0;right:0;
+  padding:10px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  z-index:20;
+}
+.hud-pill{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;padding:6px 18px;
+  text-align:center;min-width:90px;
+}
+.hud-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);}
+.hud-val{font-family:'Boogaloo',cursive;font-size:26px;line-height:1.1;}
+#timerVal{color:var(--gold);}
+#scoreVal{color:var(--green);}
+.hud-title{font-family:'Boogaloo',cursive;font-size:20px;color:rgba(255,255,255,.6);}
+
+/* ─── GAME GRID ─── */
+#game{padding-top:80px;padding-bottom:10px;}
+.grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:14px;max-width:400px;width:100%;
+  margin:0 auto;
+}
+.hole{
+  aspect-ratio:1;
+  background:radial-gradient(circle at 40% 35%,#1a0836,#0d0520);
+  border-radius:50%;
+  border:3px solid #2d1654;
+  position:relative;overflow:hidden;
+  cursor:pointer;
+  box-shadow:inset 0 6px 20px rgba(0,0,0,.9),0 2px 8px rgba(0,0,0,.6);
+  transition:transform .1s;
+}
+.hole:active{transform:scale(.93);}
+.hole.whacked{border-color:var(--gold);box-shadow:inset 0 6px 20px rgba(0,0,0,.9),0 0 16px rgba(251,191,36,.4);}
+.fool{
+  position:absolute;
+  bottom:-110%;
+  left:50%;transform:translateX(-50%);
+  font-size:clamp(38px,9vw,54px);
+  line-height:1;
+  transition:bottom .2s cubic-bezier(.34,1.56,.64,1);
+  z-index:2;
+  filter:drop-shadow(0 -4px 6px rgba(0,0,0,.6));
+  pointer-events:none;
+}
+.fool.up{bottom:2%;}
+.fool.smashed{
+  animation:smash .3s ease-out forwards;
+}
+@keyframes smash{
+  0%{transform:translateX(-50%) scale(1);}
+  40%{transform:translateX(-50%) scale(1.4) rotate(15deg);opacity:.6;}
+  100%{transform:translateX(-50%) scale(0) rotate(40deg);opacity:0;}
+}
+
+/* Point popup */
+.ptpop{
+  position:absolute;top:15%;left:50%;
+  transform:translateX(-50%);
+  font-family:'Boogaloo',cursive;font-size:30px;
+  pointer-events:none;z-index:10;
+  animation:ptFloat .75s ease-out forwards;
+}
+@keyframes ptFloat{
+  0%{opacity:1;transform:translateX(-50%) translateY(0) scale(1.2);}
+  100%{opacity:0;transform:translateX(-50%) translateY(-55px) scale(.8);}
+}
+
+/* ─── TAUNTS ─── */
+#tauntBar{
+  text-align:center;min-height:44px;
+  margin-top:14px;font-size:clamp(14px,3.5vw,18px);
+  font-weight:700;color:rgba(255,255,255,.75);
+  padding:0 16px;
+}
+
+/* ─── SCREEN FLASH ─── */
+.flash{
+  position:fixed;inset:0;pointer-events:none;z-index:50;
+  animation:flashAnim .5s ease-out forwards;
+}
+@keyframes flashAnim{0%{opacity:.6;}100%{opacity:0;}}
+
+/* ─── FAKE GAME OVER ─── */
+#fakeGO{
+  position:fixed;inset:0;background:rgba(0,0,0,.96);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:200;padding:20px;
+  transition:opacity .3s;
+}
+#fakeGO.hidden{opacity:0;pointer-events:none;}
+.fake-go-title{
+  font-family:'Boogaloo',cursive;font-size:clamp(56px,14vw,100px);
+  color:var(--red);
+  animation:shakeIn .4s ease;
+  text-align:center;line-height:1;
+}
+@keyframes shakeIn{
+  0%{transform:scale(.6) rotate(-8deg);opacity:0;}
+  60%{transform:scale(1.05) rotate(3deg);}
+  100%{transform:scale(1) rotate(0);opacity:1;}
+}
+.fake-go-score{
+  font-size:18px;color:rgba(255,255,255,.55);margin:10px 0;
+}
+.fake-go-score span{font-family:'Boogaloo',cursive;font-size:30px;color:var(--gold);}
+.aprfools-text{
+  font-family:'Boogaloo',cursive;font-size:clamp(32px,8vw,52px);
+  background:linear-gradient(135deg,#fbbf24,#f97316,#ec4899);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-align:center;opacity:0;transform:translateY(20px);
+  transition:opacity .4s,transform .4s;
+}
+.aprfools-text.show{opacity:1;transform:translateY(0);}
+.resume-txt{
+  font-size:16px;color:rgba(255,255,255,.5);margin-top:10px;
+  opacity:0;transition:opacity .3s;
+}
+.resume-txt.show{opacity:1;}
+
+/* ─── REAL GAME OVER ─── */
+#realGO{
+  position:fixed;inset:0;background:rgba(0,0,0,.9);
+  display:flex;align-items:center;justify-content:center;
+  z-index:300;padding:20px;
+  transition:opacity .3s;
+}
+#realGO.hidden{opacity:0;pointer-events:none;}
+.go-card{
+  background:var(--bg2);
+  border:2px solid rgba(255,255,255,.12);
+  border-radius:24px;padding:36px 32px;
+  text-align:center;max-width:380px;width:100%;
+}
+.go-emoji{font-size:56px;display:block;margin-bottom:6px;}
+.go-title{
+  font-family:'Boogaloo',cursive;
+  font-size:clamp(34px,8vw,52px);
+  line-height:1;margin-bottom:6px;
+}
+.go-sub{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:8px;}
+.final-score{
+  font-family:'Boogaloo',cursive;
+  font-size:clamp(56px,14vw,84px);
+  background:linear-gradient(135deg,#fbbf24,#f97316);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin:10px 0 4px;
+}
+.final-lbl{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px;}
+.hs-badge{
+  background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);
+  border-radius:10px;padding:8px 16px;
+  font-size:14px;color:var(--gold);margin-bottom:14px;
+  display:inline-block;
+}
+
+/* ─── PRANK: SCORE GLITCH ─── */
+.glitch-overlay{
+  position:fixed;inset:0;pointer-events:none;z-index:150;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .3s;
+}
+.glitch-overlay.hidden{opacity:0;}
+.glitch-txt{
+  font-family:'Boogaloo',cursive;font-size:clamp(42px,10vw,72px);
+  background:linear-gradient(135deg,#fbbf24,#22c55e);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-align:center;animation:glitchShake .08s ease infinite;
+  text-shadow:none;
+}
+@keyframes glitchShake{
+  0%,100%{transform:translate(0,0);}
+  25%{transform:translate(-2px,1px);}
+  75%{transform:translate(2px,-1px);}
+}
+
+/* ─── CONFETTI ─── */
+#confettiCont{position:fixed;inset:0;pointer-events:none;z-index:400;overflow:hidden;}
+@keyframes cfall{
+  0%{transform:translateY(-30px) rotate(0);opacity:1;}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0;}
+}
+
+/* ─── COMBO ─── */
+.combo-pop{
+  position:fixed;top:70px;left:50%;transform:translateX(-50%);
+  font-family:'Boogaloo',cursive;font-size:32px;
+  color:var(--gold);pointer-events:none;z-index:30;
+  animation:comboAnim .7s ease-out forwards;
+  white-space:nowrap;text-align:center;
+  filter:drop-shadow(0 0 10px rgba(251,191,36,.6));
+}
+@keyframes comboAnim{
+  0%{opacity:1;transform:translateX(-50%) scale(1.3) translateY(0);}
+  100%{opacity:0;transform:translateX(-50%) scale(.8) translateY(-30px);}
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-height:680px){
+  .grid{gap:9px;max-width:310px;}
+  .fool{font-size:36px;}
+  .hud-val{font-size:22px;}
+  #menu .logo{font-size:clamp(36px,9vw,60px);}
+  .jester-icon{font-size:clamp(48px,9vw,72px)!important;}
+}
+@media(max-width:380px){
+  .grid{gap:9px;max-width:300px;}
+  .btn{width:230px;}
+}
+</style>
+</head>
+<body>
+
+<div id="starBg"></div>
+
+<!-- ════ MAIN MENU ════ -->
+<div class="screen" id="menu">
+  <span class="jester-icon">🎭</span>
+  <div class="logo">WHACK-A-FOOL!</div>
+  <div class="tagline">✦ April Fools Edition ✦</div>
+  
+  <!-- Username display + change -->
+  <div onclick="changeUsername()" class="username-pill" id="usernamePill">
+    👤 <span id="currentUsernameDisplay">FoolMaster42</span>
+    <span style="font-size:11px;opacity:.6;">(tap to change)</span>
+  </div>
+
+  <button class="btn btn-play" id="playBtn">🃏 &nbsp;PLAY!</button>
+  <button class="btn btn-ghost" onclick="showScreen('howto')">❓ How to Play</button>
+  <button class="btn btn-ghost" onclick="showScreen('scores')">🏆 Global Leaderboard</button>
+  <p style="margin-top:24px;font-size:11px;color:rgba(255,255,255,.2);">⚠️ Play at your own risk. Nothing is as it seems.</p>
+</div>
+
+<!-- ════ HOW TO PLAY ════ -->
+<div class="screen hidden" id="howto">
+  <h2 style="font-family:'Boogaloo',cursive;font-size:38px;text-align:center;margin-bottom:4px;">How to Play</h2>
+  <p style="color:rgba(255,255,255,.5);font-size:14px;text-align:center;margin-bottom:8px;">Whack fools before they disappear… but you can <strong>NEVER</strong> trust them.</p>
+  <div class="legend">
+    <div class="legend-card">
+      <span class="em">🤡</span>
+      <div class="legend-pts">RANDOM</div>
+      <div class="legend-name">Regular Fool</div>
+    </div>
+    <div class="legend-card">
+      <span class="em">🤩</span>
+      <div class="legend-pts">RANDOM</div>
+      <div class="legend-name">Golden Fool</div>
+    </div>
+    <div class="legend-card">
+      <span class="em">💣</span>
+      <div class="legend-pts">RANDOM</div>
+      <div class="legend-name">Bomb Fool</div>
+    </div>
+  </div>
+  <div class="warn-box">
+    ⚠️ <strong>EVERY FOOL GIVES RANDOM POINTS</strong><br>
+    🤡, 🤩, 💣 — all completely unpredictable.<br>
+    You will never trust the game again.
+  </div>
+  <button class="btn btn-ghost" style="margin-top:20px;" onclick="showScreen('menu')">← Back</button>
+</div>
+
+<!-- ════ GLOBAL LEADERBOARD ════ -->
+<div class="screen hidden" id="scores">
+  <h2 style="font-family:'Boogaloo',cursive;font-size:38px;text-align:center;margin-bottom:4px;">🏆 Global Hall of Fools</h2>
+  <p style="color:rgba(255,255,255,.4);font-size:13px;text-align:center;margin-bottom:4px;">Top jesters from everywhere (localStorage fallback)</p>
+  <ul class="scores-table" id="scoresList"></ul>
+  <button class="btn btn-ghost" style="margin-top:8px;" onclick="showScreen('menu')">← Back</button>
+</div>
+
+<!-- ════ GAME HUD ════ -->
+<div id="hud" style="display:none;">
+  <div class="hud-pill">
+    <div class="hud-lbl">Score</div>
+    <div class="hud-val" id="scoreVal">0</div>
+  </div>
+  <div class="hud-title">🎭 Fool</div>
+  <div class="hud-pill">
+    <div class="hud-lbl">Time</div>
+    <div class="hud-val" id="timerVal">60</div>
+  </div>
+</div>
+
+<!-- ════ GAME ════ -->
+<div class="screen hidden" id="game">
+  <div class="grid" id="grid"></div>
+  <div id="tauntBar"></div>
+</div>
+
+<!-- ════ FAKE GAME OVER ─── -->
+<div id="fakeGO" class="hidden">
+  <div class="fake-go-title">GAME OVER</div>
+  <div class="fake-go-score">Your score: <span id="fakeScoreNum">0</span></div>
+  <div class="aprfools-text" id="aprText">🎭 APRIL FOOLS! 🎭</div>
+  <div class="resume-txt" id="resumeTxt">Game resumes in <span id="resumeSecs">3</span>…</div>
+</div>
+
+<!-- ════ REAL GAME OVER ─── -->
+<div id="realGO" class="hidden">
+  <div class="go-card">
+    <span class="go-emoji" id="goEmoji">🤡</span>
+    <div class="go-title" id="goTitle">GAME OVER!</div>
+    <div class="go-sub" id="goSub">You got thoroughly fooled.</div>
+    <div class="final-score" id="finalScore">0</div>
+    <div class="final-lbl">FINAL SCORE</div>
+    <div id="hsBadge" style="display:none;" class="hs-badge">🏆 NEW GLOBAL HIGH SCORE!</div>
+    <button class="btn btn-play" style="width:220px;" onclick="startGame()">🔄 Play Again</button>
+    <button class="btn btn-ghost" style="width:220px;margin-top:8px;" onclick="showScreen('menu')">🏠 Main Menu</button>
+  </div>
+</div>
+
+<!-- ════ SCORE GLITCH OVERLAY ════ -->
+<div id="glitchOverlay" class="glitch-overlay hidden" style="background:rgba(0,0,0,.85);">
+  <div class="glitch-txt" id="glitchTxt">💰 1,000,000 pts! 💰</div>
+  <div style="font-family:'Boogaloo',cursive;font-size:28px;color:var(--pink);margin-top:12px;opacity:0;transition:opacity .4s;" id="glitchReveal">APRIL FOOLS! 😂</div>
+  <div style="font-size:15px;color:rgba(255,255,255,.5);margin-top:8px;opacity:0;transition:opacity .3s;" id="glitchReal"></div>
+</div>
+
+<!-- Username modal (for high score) -->
+<div id="usernameModal" style="display:none;position:fixed;inset:0;background:rgba(18,7,31,.97);z-index:99999;flex-direction:column;align-items:center;justify-content:center;">
+  <div style="background:#1e0d35;border:3px solid #fbbf24;border-radius:24px;padding:40px 30px;max-width:380px;width:90%;text-align:center;box-shadow:0 0 60px #fbbf24;">
+    <div style="font-size:60px;margin-bottom:10px;">🏆</div>
+    <h2 style="font-family:'Boogaloo',cursive;font-size:36px;color:#fbbf24;">NEW GLOBAL HIGH SCORE!</h2>
+    <p style="margin:15px 0 25px;color:#ccc;">Claim your spot on the leaderboard</p>
+    <input id="usernameInput" maxlength="14" placeholder="YourJesterName" style="width:100%;padding:16px;font-size:22px;text-align:center;border-radius:9999px;border:none;background:#12071f;color:#fff;margin-bottom:20px;">
+    <button onclick="confirmUsername()" class="btn btn-play" style="width:100%;margin-bottom:12px;">SAVE TO GLOBAL LEADERBOARD</button>
+    <button onclick="skipUsernameModal()" class="btn btn-ghost" style="width:100%;">Skip (anonymous)</button>
+  </div>
+</div>
+
+<!-- Confetti -->
+<div id="confettiCont"></div>
+
+<script>
+// ─── STATE ───
+let score=0,timeLeft=60,gameRunning=false;
+let mainTimer=null,spawnHandle=null;
+let combo=0,lastHitTime=0;
+let pranks={fakeGO:false,glitch:false,escaper:false};
+const HOLES=9;
+let holes=[];
+
+// ─── GLOBAL USERNAME (saved in localStorage) ───
+let currentUsername = localStorage.getItem('waf_username') || 'FoolMaster' + Math.floor(1000 + Math.random()*9000);
+
+// ─── UNPREDICTABLE FOOLS — ALL POINTS ARE RANDOM (you can NEVER trust the game) ───
+const FOOLS=[
+  {e:'🤡',type:'normal',dur:2200,w:50},   // wide random range
+  {e:'🤩',type:'gold',dur:1500,w:25},
+  {e:'💣',type:'bomb',dur:2000,w:25},
+];
+
+// Random points for EVERY fool — completely unpredictable
+function getRandomPoints(type){
+  let base;
+  switch(type){
+    case 'normal': base = Math.random()*9 - 3; break;   // -3 → +6
+    case 'gold':   base = Math.random()*12 + 2; break;  // +2 → +14
+    case 'bomb':   base = Math.random()*11 - 9; break;  // -9 → +2
+    default:       base = Math.random()*10 - 4;
+  }
+  return Math.floor(base);
+}
+
+const TAUNT_MISS=['Ha! Too slow!','You snooze, you lose!','Can\'t touch this! 💃','I\'m untouchable!','Nice try, dummy!','Blink and you miss! 👀'];
+const TAUNT_HIT=['WHACK! 💥','GOT EM!','SMASHED! 💫','POW! 🌟','BOOM BABY!','NAILED IT!'];
+const TAUNT_BOMB=['OUCH! That\'s a bomb! 💀','-2? +2? Who knows!','Wrong choice, genius!'];
+const TAUNT_GOLD=['JACKPOT! …maybe?','GOLDEN? Or just lucky!'];
+
+// ─── SCREENS ───
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
+  document.getElementById('hud').style.display='none';
+  document.getElementById('fakeGO').classList.add('hidden');
+  document.getElementById('realGO').classList.add('hidden');
+  document.getElementById('glitchOverlay').classList.add('hidden');
+  document.getElementById(id).classList.remove('hidden');
+  if(id==='scores')renderScores();
+}
+
+function showGameUI(){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
+  document.getElementById('game').classList.remove('hidden');
+  document.getElementById('hud').style.display='flex';
+}
+
+// ─── STARS ───
+(function(){
+  const bg=document.getElementById('starBg');
+  for(let i=0;i<90;i++){
+    const s=document.createElement('div');s.className='star';
+    const sz=Math.random()*2.5+.5;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${(Math.random()*4).toFixed(1)}s;animation-duration:${(2+Math.random()*3).toFixed(1)}s;`;
+    bg.appendChild(s);
+  }
+})();
+
+// ─── PLAY BUTTON CHAOS (unchanged) ───
+const playBtn=document.getElementById('playBtn');
+const BW=240,BH=52;
+let bx=0,by=0,bvx=0,bvy=0;
+let mx=-9999,my=-9999;
+let chaseFrames=0,lastTauntMs=0,teleportCD=0;
+let btnTired=false,btnCaught=false,btnLoopRunning=false;
+
+const FLEE_MSGS=['Nope! 😂','Can\'t catch me! 🤡','Too slow!','ZOOM! 💨','Ha!','Wheee! 🎭','Not today!','Nice try!','Is that ALL?!','Run run run!'];
+const TIRED_MSGS=['Okay I\'m… a little tired… 😮‍💨','Fine… maybe… 🥱','Ugh fine, catch me already…','I can\'t run forever 🥵','*heavy breathing* okay okay…'];
+const BTN_LABELS=['🃏 PLAY!','Catch me!','NOPE →','Ha! Miss!','← Over here!','Nice try 😂','RUN RUN RUN','Wheee!','→ NOPE ←','Come get me!'];
+
+function initPlayBtn(){
+  const vw=window.innerWidth,vh=window.innerHeight;
+  bx=(vw-BW)/2; by=vh*0.47;
+  applyBtnPos();
+  playBtn.style.transition='opacity .15s';
+  playBtn.style.width=BW+'px';
+  playBtn.style.margin='0';
+  if(!btnLoopRunning){btnLoopRunning=true;requestAnimationFrame(btnLoop);}
+}
+
+function applyBtnPos(){
+  playBtn.style.position='fixed';
+  playBtn.style.left=bx+'px';
+  playBtn.style.top=by+'px';
+  playBtn.style.zIndex='1500';
+}
+
+document.addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;});
+document.addEventListener('touchmove',e=>{mx=e.touches[0].clientX;my=e.touches[0].clientY;},{passive:true});
+
+function btnLoop(){
+  if(btnCaught)return;
+  requestAnimationFrame(btnLoop);
+  const vw=window.innerWidth,vh=window.innerHeight;
+  const bcx=bx+BW/2,bcy=by+BH/2;
+  const dx=mx-bcx,dy=my-bcy;
+  const dist=Math.sqrt(dx*dx+dy*dy);
+  chaseFrames++;
+  if(chaseFrames>1680&&!btnTired){
+    btnTired=true;
+    playBtn.textContent='😮‍💨 fine… click me';
+  }
+  const diffMult=Math.min(1+chaseFrames/400,3.5);
+  const fleeR=btnTired?70:Math.min(140+chaseFrames/30,240);
+  const baseSpd=btnTired?2.5:5*diffMult;
+  if(dist<fleeR){
+    const norm=Math.max(dist,1);
+    const force=(baseSpd*(1+(fleeR-dist)/fleeR))*1.4;
+    bvx+=(-dx/norm)*force*0.35;
+    bvy+=(-dy/norm)*force*0.35;
+  }
+  if(Math.random()<0.04+chaseFrames/12000){
+    bvx+=(Math.random()-.5)*baseSpd*1.5;
+    bvy+=(Math.random()-.5)*baseSpd*1.5;
+  }
+  const fric=btnTired?.87:.78;
+  bvx*=fric;bvy*=fric;
+  const spd=Math.sqrt(bvx*bvx+bvy*bvy);
+  const cap=btnTired?4:baseSpd*2.2;
+  if(spd>cap){bvx=bvx/spd*cap;bvy=bvy/spd*cap;}
+  bx+=bvx;by+=bvy;
+  const pad=6;
+  if(bx<pad){bx=pad;bvx=Math.abs(bvx)*1.1+1;}
+  if(bx>vw-BW-pad){bx=vw-BW-pad;bvx=-(Math.abs(bvx)*1.1+1);}
+  if(by<6){by=6;bvy=Math.abs(bvy)*1.1+1;}
+  if(by>vh-BH-6){by=vh-BH-6;bvy=-(Math.abs(bvy)*1.1+1);}
+  applyBtnPos();
+  if(!btnTired){
+    const closeness=Math.max(0,1-dist/fleeR);
+    const scale=1-closeness*.18;
+    const rot=closeness*28*Math.sin(chaseFrames*.12);
+    const skewX=closeness*8*Math.cos(chaseFrames*.09);
+    playBtn.style.transform=`scale(${scale.toFixed(3)}) rotate(${rot.toFixed(1)}deg) skewX(${skewX.toFixed(1)}deg)`;
+  }
+  if(!btnTired&&chaseFrames%120===0&&dist<fleeR*1.5){
+    playBtn.textContent=BTN_LABELS[Math.floor(chaseFrames/120)%BTN_LABELS.length];
+  }
+  teleportCD--;
+  const tpThreshold=Math.max(160,300-chaseFrames/8);
+  if(!btnTired&&teleportCD<=0&&dist<tpThreshold&&Math.random()<.015){
+    doTeleport(vw,vh);
+  }
+  const now=Date.now();
+  const tauntGap=btnTired?2200:Math.max(900,1800-chaseFrames*2);
+  if(now-lastTauntMs>tauntGap&&dist<fleeR*1.8){
+    lastTauntMs=now;
+    const pool=btnTired?TIRED_MSGS:FLEE_MSGS;
+    showMenuTaunt(pool[Math.floor(Math.random()*pool.length)]);
+  }
+}
+
+function doTeleport(vw,vh){/* unchanged from original */ 
+  const bcx=bx+BW/2,bcy=by+BH/2;
+  spawnGhost(bx,by);
+  let tx,ty,tries=0;
+  do{
+    tx=10+Math.random()*(vw-BW-20);
+    ty=10+Math.random()*(vh-BH-20);
+    const tcx=tx+BW/2,tcy=ty+BH/2;
+    const d=Math.sqrt((mx-tcx)**2+(my-tcy)**2);
+    if(d>280||tries>25)break;
+    tries++;
+  }while(true);
+  bx=tx;by=ty;bvx=0;bvy=0;
+  playBtn.style.opacity='0';
+  setTimeout(()=>{applyBtnPos();playBtn.style.opacity='1';},80);
+  teleportCD=Math.max(120,240-chaseFrames/5);
+}
+
+function spawnGhost(x,y){/* unchanged */ 
+  const g=document.createElement('button');
+  g.textContent='🃏 PLAY!';
+  g.className='btn btn-play';
+  g.style.cssText=`position:fixed;left:${x}px;top:${y}px;width:${BW}px;margin:0;z-index:1400;pointer-events:none;opacity:.55;transition:opacity .5s,transform .5s;`;
+  document.body.appendChild(g);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{g.style.opacity='0';g.style.transform='scale(.7)';}));
+  setTimeout(()=>g.remove(),550);
+}
+
+playBtn.addEventListener('click',()=>{if(!btnCaught){btnCaught=true;startGame();}});
+
+let menuTauntT=null;
+function showMenuTaunt(msg){
+  let el=document.getElementById('menuTnt');
+  if(!el){
+    el=document.createElement('div');el.id='menuTnt';
+    el.style.cssText='position:fixed;bottom:50px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:9px 20px;font-size:15px;font-weight:700;color:rgba(255,255,255,.9);white-space:nowrap;z-index:2000;animation:fadeIn .3s ease;pointer-events:none;';
+    document.body.appendChild(el);
+  }
+  el.textContent=msg;clearTimeout(menuTauntT);
+  menuTauntT=setTimeout(()=>{if(el)el.remove();},2800);
+}
+
+// ─── GRID SETUP ───
+function buildGrid(){
+  const g=document.getElementById('grid');g.innerHTML='';holes=[];
+  for(let i=0;i<HOLES;i++){
+    const hole=document.createElement('div');hole.className='hole';
+    const fool=document.createElement('div');fool.className='fool';
+    hole.appendChild(fool);
+    hole.addEventListener('pointerdown',e=>{e.preventDefault();whack(i);});
+    g.appendChild(hole);
+    holes.push({el:hole,fool:fool,active:false,type:null,hideT:null});
+  }
+}
+
+// ─── START GAME ───
+function startGame(){
+  document.getElementById('realGO').classList.add('hidden');
+  document.getElementById('fakeGO').classList.add('hidden');
+  document.getElementById('glitchOverlay').classList.add('hidden');
+  document.getElementById('tauntBar').textContent='';
+  score=0;timeLeft=60;gameRunning=false;combo=0;lastHitTime=0;
+  pranks={fakeGO:false,glitch:false,escaper:false};
+  buildGrid();updateHUD();showGameUI();
+  document.getElementById('timerVal').style.color='var(--gold)';
+  let rdy=3;
+  const rdyEl=document.createElement('div');
+  rdyEl.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:500;';
+  rdyEl.innerHTML=`<div style="font-family:'Boogaloo',cursive;font-size:80px;color:var(--gold);" id="rdyNum">3</div><div style="font-size:18px;color:rgba(255,255,255,.6);">Get Ready to be Fooled…</div>`;
+  document.body.appendChild(rdyEl);
+  const rdyI=setInterval(()=>{
+    rdy--;
+    if(rdy>0){document.getElementById('rdyNum').textContent=rdy;}
+    else if(rdy===0){document.getElementById('rdyNum').textContent='GO!';}
+    else{
+      clearInterval(rdyI);rdyEl.remove();
+      gameRunning=true;
+      mainTimer=setInterval(tick,1000);
+      scheduleSpawn();
+    }
+  },900);
+}
+
+function tick(){
+  if(!gameRunning)return;
+  timeLeft--;
+  updateHUD();
+  if(timeLeft===10)document.getElementById('timerVal').style.color='var(--red)';
+  if(timeLeft===30&&!pranks.fakeGO){pranks.fakeGO=true;triggerFakeGO();}
+  if(timeLeft===45&&!pranks.glitch){pranks.glitch=true;triggerGlitch();}
+  if(timeLeft===20&&!pranks.escaper){pranks.escaper=true;triggerEscaper();}
+  if(timeLeft<=0)endGame();
+}
+
+function updateHUD(){
+  document.getElementById('scoreVal').textContent=score;
+  document.getElementById('timerVal').textContent=timeLeft;
+}
+
+// ─── SPAWN ───
+function scheduleSpawn(){
+  if(!gameRunning)return;
+  const elapsed=60-timeLeft;
+  const minDelay=Math.max(300,700-elapsed*6);
+  const delay=minDelay+Math.random()*600;
+  spawnHandle=setTimeout(()=>{spawnFool();scheduleSpawn();},delay);
+}
+
+function pickFool(){
+  const tot=FOOLS.reduce((s,f)=>s+f.w,0);
+  let r=Math.random()*tot;
+  for(const f of FOOLS){r-=f.w;if(r<=0)return f;}
+  return FOOLS[0];
+}
+
+function spawnFool(){
+  if(!gameRunning)return;
+  const empty=holes.map((h,i)=>h.active?-1:i).filter(i=>i>=0);
+  const active=holes.filter(h=>h.active).length;
+  if(active>=3||empty.length===0)return;
+  const idx=empty[Math.floor(Math.random()*empty.length)];
+  const ft=pickFool();
+  const h=holes[idx];
+  h.active=true;h.type=ft;
+  h.fool.textContent=ft.e;h.fool.className='fool';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>h.fool.classList.add('up')));
+  const speedMult=timeLeft>40?1:timeLeft>20?.8:.65;
+  h.hideT=setTimeout(()=>{if(h.active)hideFool(idx,true);},ft.dur*speedMult);
+}
+
+function hideFool(idx,missed){
+  const h=holes[idx];
+  if(!h.active)return;
+  clearTimeout(h.hideT);
+  if(missed&&h.type.type!=='bomb'){
+    setTaunt(TAUNT_MISS[Math.floor(Math.random()*TAUNT_MISS.length)]);
+  }
+  h.fool.classList.remove('up','smashed');
+  h.active=false;h.type=null;
+}
+
+// ─── WHACK — RANDOM POINTS FOR EVERY FOOL ───
+function whack(idx){
+  if(!gameRunning)return;
+  const h=holes[idx];
+  if(!h.active)return;
+  const ft=h.type;
+  clearTimeout(h.hideT);
+  h.fool.classList.remove('up');h.fool.classList.add('smashed');
+  h.active=false;h.type=null;
+  setTimeout(()=>{h.fool.classList.remove('smashed');h.fool.textContent='';},350);
+
+  // RANDOM POINTS — THIS IS THE KEY CHAOS UPGRADE
+  const pts = getRandomPoints(ft.type);
+  score=Math.max(0,score+pts);
+  updateHUD();
+  showPtPop(idx,pts);
+
+  if(ft.type==='bomb'){setTaunt(TAUNT_BOMB[Math.floor(Math.random()*TAUNT_BOMB.length)]);flashScreen('#ef4444');}
+  else if(ft.type==='gold'){setTaunt(TAUNT_GOLD[Math.floor(Math.random()*TAUNT_GOLD.length)]);flashScreen('#fbbf24');}
+  else{
+    const now=Date.now();
+    combo=(now-lastHitTime<1200)?combo+1:1;
+    lastHitTime=now;
+    if(combo>=3)showCombo(combo);
+    setTaunt(TAUNT_HIT[Math.floor(Math.random()*TAUNT_HIT.length)]);
+  }
+  h.el.classList.add('whacked');
+  setTimeout(()=>h.el.classList.remove('whacked'),400);
+}
+
+function showPtPop(idx,pts){
+  const p=document.createElement('div');p.className='ptpop';
+  p.textContent=pts>0?'+'+pts:pts;
+  p.style.color=pts>0?(pts>4?'var(--gold)':'var(--green)'):'var(--red)';
+  holes[idx].el.appendChild(p);
+  setTimeout(()=>p.remove(),800);
+}
+
+function showCombo(n){
+  const el=document.createElement('div');el.className='combo-pop';
+  el.textContent=n+'x COMBO! 🔥';
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),750);
+}
+
+let tauntT=null;
+function setTaunt(msg){
+  const el=document.getElementById('tauntBar');
+  el.textContent=msg;clearTimeout(tauntT);
+  tauntT=setTimeout(()=>{el.textContent='';},2200);
+}
+
+function flashScreen(color='#ef4444'){
+  const fl=document.createElement('div');fl.className='flash';
+  fl.style.background=color;fl.style.opacity='0.4';
+  document.body.appendChild(fl);setTimeout(()=>fl.remove(),600);
+}
+
+// ─── PRANKS (unchanged) ───
+function triggerFakeGO(){/* same as original */ 
+  pauseGame();
+  document.getElementById('fakeScoreNum').textContent=score;
+  const fgo=document.getElementById('fakeGO');
+  fgo.classList.remove('hidden');
+  const at=document.getElementById('aprText');
+  const rt=document.getElementById('resumeTxt');
+  const rs=document.getElementById('resumeSecs');
+  at.classList.remove('show');rt.classList.remove('show');
+  setTimeout(()=>at.classList.add('show'),1100);
+  let cd=3;
+  setTimeout(()=>{rt.classList.add('show');rs.textContent=cd;
+    const ci=setInterval(()=>{cd--;rs.textContent=cd;
+      if(cd<=0){clearInterval(ci);fgo.classList.add('hidden');
+        at.classList.remove('show');rt.classList.remove('show');
+        resumeGame();}
+    },1000);},2000);
+}
+function pauseGame(){
+  gameRunning=false;
+  clearInterval(mainTimer);clearTimeout(spawnHandle);
+  holes.forEach((_,i)=>{if(holes[i].active)hideFool(i,false);});
+}
+function resumeGame(){
+  gameRunning=true;
+  mainTimer=setInterval(tick,1000);
+  scheduleSpawn();
+  setTaunt('Ha! Did I fool ya? 😈 Game on!');
+}
+function triggerGlitch(){/* same as original */ 
+  pauseGame();
+  const ov=document.getElementById('glitchOverlay');
+  const rev=document.getElementById('glitchReveal');
+  const rl=document.getElementById('glitchReal');
+  ov.classList.remove('hidden');rev.style.opacity='0';rl.style.opacity='0';
+  setTimeout(()=>{rev.style.opacity='1';},900);
+  setTimeout(()=>{rl.textContent='Your real score is still just '+score+' 😅';rl.style.opacity='1';},1600);
+  setTimeout(()=>{ov.classList.add('hidden');resumeGame();},3200);
+}
+function triggerEscaper(){/* same as original */ 
+  const active=holes.map((h,i)=>h.active?i:-1).filter(i=>i>=0);
+  const idx=active.length>0?active[0]:Math.floor(Math.random()*HOLES);
+  const h=holes[idx];
+  if(!h.active){
+    h.fool.textContent='🤡';h.fool.className='fool';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>h.fool.classList.add('up')));
+    setTimeout(()=>{
+      h.fool.style.transition='bottom .4s ease-in,left .6s ease-out,opacity .3s';
+      h.fool.style.bottom='110%';h.fool.style.opacity='0';
+      setTaunt('✌️ I\'m outta here! Can\'t catch me!');
+      setTimeout(()=>{h.fool.style.transition='';h.fool.style.opacity='';h.fool.classList.remove('up');h.fool.textContent='';},700);
+    },1000);
+    return;
+  }
+  clearTimeout(h.hideT);
+  h.fool.style.transition='bottom .4s ease-in,opacity .3s';
+  h.fool.style.bottom='110%';h.fool.style.opacity='0';
+  setTaunt('✌️ BYE BYE! Can\'t catch me!!');
+  setTimeout(()=>{h.fool.style.transition='';h.fool.style.opacity='';h.fool.classList.remove('up');h.fool.textContent='';h.active=false;h.type=null;},700);
+}
+
+// ─── END GAME + LEADERBOARD ───
+// LEADERBOARD STORAGE: username-based global leaderboard
+// localStorage fallback + EASY API UPGRADE PATH (see comments below)
+function getLeaderboard(){
+  try{
+    return JSON.parse(localStorage.getItem('waf_global_leaderboard')||'[]');
+  }catch(e){return [];}
+}
+
+function saveScoreToLeaderboard(username, finalScore){
+  let board = getLeaderboard();
+  board.push({username, score:finalScore, date:Date.now()});
+  board.sort((a,b)=>b.score-a.score);
+  board = board.slice(0,12); // keep top 12 globally
+  try{
+    localStorage.setItem('waf_global_leaderboard',JSON.stringify(board));
+  }catch(e){}
+  
+  // ─── EASY API UPGRADE PATH ───
+  // If you have a backend, just replace the lines below:
+  // if(USE_API) await fetch('https://your-api.com/leaderboard', {method:'POST', body:JSON.stringify({username, score:finalScore})});
+  // (keep localStorage as fallback for offline play)
+  
+  return board[0] && finalScore >= board[0].score;
+}
+
+function renderScores(){
+  let board = getLeaderboard();
+  // Seed some fake "global" entries on first run so it feels populated
+  if(board.length===0){
+    board = [
+      {username:"JesterKing420",score:142},
+      {username:"ChaosWhacker",score:119},
+      {username:"BombSurvivor",score:97},
+      {username:"GoldenFool99",score:84},
+      {username:"Unpredictable",score:71},
+      {username:"AprilFoolX",score:65},
+    ];
+    localStorage.setItem('waf_global_leaderboard',JSON.stringify(board));
+  }
+  const li=document.getElementById('scoresList');
+  let html='';
+  const ranks=['🥇','🥈','🥉'];
+  board.forEach((entry,i)=>{
+    const rank = i<3 ? ranks[i] : (i+1)+'th';
+    html += `<li class="score-row"><span class="score-rank ${i<3?'g'+(i+1):''}">${rank}</span><span class="score-name">${entry.username}</span><span class="score-pts">${entry.score}</span></li>`;
+  });
+  li.innerHTML=html;
+}
+
+// Username helpers
+function updateUsernameDisplay(){
+  document.getElementById('currentUsernameDisplay').textContent = currentUsername;
+}
+
+function changeUsername(){
+  const name = prompt('Your new jester username (max 14 chars):', currentUsername);
+  if(name && name.trim()){
+    currentUsername = name.trim().slice(0,14);
+    localStorage.setItem('waf_username', currentUsername);
+    updateUsernameDisplay();
+  }
+}
+
+function showUsernameModalForHighScore(){
+  document.getElementById('usernameModal').style.display='flex';
+  document.getElementById('usernameInput').value = currentUsername;
+  document.getElementById('usernameInput').focus();
+}
+
+function confirmUsername(){
+  const input = document.getElementById('usernameInput').value.trim();
+  if(input) currentUsername = input.slice(0,14);
+  localStorage.setItem('waf_username', currentUsername);
+  document.getElementById('usernameModal').style.display='none';
+  // now save the score
+  const isHS = saveScoreToLeaderboard(currentUsername, score);
+  finishEndGameUI(isHS);
+}
+
+function skipUsernameModal(){
+  currentUsername = 'MysteriousFool';
+  document.getElementById('usernameModal').style.display='none';
+  const isHS = saveScoreToLeaderboard(currentUsername, score);
+  finishEndGameUI(isHS);
+}
+
+function finishEndGameUI(isHS){
+  const hsBadge = document.getElementById('hsBadge');
+  if(isHS && score>0){hsBadge.style.display='inline-block';launchConfetti();}
+  else{hsBadge.style.display='none';}
+  updateUsernameDisplay();
+}
+
+function endGame(){
+  gameRunning=false;
+  clearInterval(mainTimer);clearTimeout(spawnHandle);
+  holes.forEach((_,i)=>{if(holes[i].active)hideFool(i,false);});
+
+  const titles=['GAME OVER!','TIME\'S UP!','FOOLED AGAIN!','WHACK ATTACK OVER!'];
+  const subs=['You\'ve been thoroughly fooled.','The jesters win this round.','Back to fool school with you!','Better luck next April 1st.'];
+  const emojis=['🤡','🎭','🃏','😂'];
+
+  setTimeout(()=>{
+    document.getElementById('realGO').classList.remove('hidden');
+    document.getElementById('finalScore').textContent=score;
+    document.getElementById('goTitle').textContent=titles[Math.floor(Math.random()*titles.length)];
+    document.getElementById('goSub').textContent=subs[Math.floor(Math.random()*subs.length)];
+    document.getElementById('goEmoji').textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    
+    // If no username yet or this could be a high score — show modal
+    if(!localStorage.getItem('waf_username') || Math.random()<0.6){
+      showUsernameModalForHighScore();
+    } else {
+      const isHS = saveScoreToLeaderboard(currentUsername, score);
+      finishEndGameUI(isHS);
+    }
+  },600);
+}
+
+// ─── CONFETTI ───
+function launchConfetti(){
+  const c=document.getElementById('confettiCont');
+  const cols=['#fbbf24','#f97316','#ec4899','#22c55e','#60a5fa','#a78bfa','#fff'];
+  for(let i=0;i<70;i++){
+    setTimeout(()=>{
+      const p=document.createElement('div');
+      const sz=5+Math.random()*9;
+      p.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;background:${cols[Math.floor(Math.random()*cols.length)]};left:${Math.random()*100}%;top:-20px;border-radius:${Math.random()>.5?'50%':'3px'};transform:rotate(${Math.random()*360}deg);animation:cfall ${1.5+Math.random()*2}s ease-in ${Math.random()*.5}s forwards;`;
+      c.appendChild(p);setTimeout(()=>p.remove(),4000);
+    },i*30);
+  }
+}
+
+// ─── INIT ───
+showScreen('menu');
+updateUsernameDisplay();
+setTimeout(initPlayBtn,80);
+
+// Reset dodge on return to menu
+const _origShow=showScreen;
+showScreen=function(id){
+  _origShow(id);
+  if(id==='menu'){
+    btnCaught=false;btnTired=false;chaseFrames=0;bvx=0;bvy=0;
+    lastTauntMs=0;teleportCD=0;
+    playBtn.textContent='🃏 PLAY!';playBtn.style.transform='';
+    setTimeout(initPlayBtn,80);
+  }
+};
+</script>
+</body>
+</html>
